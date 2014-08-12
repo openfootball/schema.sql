@@ -1,5 +1,5 @@
 
-----
+-----------------------
 -- use like e.g. list english teams
 --
 --  SELECT *
@@ -14,9 +14,9 @@ CREATE VIEW teams_list AS
               INNER JOIN countries c ON c.id = t.country_id;
 
 
------------------------------------
+---------------------
 --
---  todo: add some examples ??
+-- todo: add some examples ??
 
 -- todo: fix: add (optional) group ??
 
@@ -47,7 +47,7 @@ SELECT e."key" AS event_key,
    INNER JOIN countries c ON c.id = l.country_id;
 
 
-----
+-------------------------------
 -- use like e.g. list German Bundesliga seasons
 --
 --  SELECT *
@@ -72,33 +72,3 @@ CREATE VIEW events_list AS
               INNER JOIN seasons s ON s.id = e.season_id
               INNER JOIN leagues l ON l.id = e.league_id
               INNER JOIN countries c ON c.id = l.country_id;
-
----
--- use like e.g list World Cup Brazil 2014 teams:
---
---  SELECT *
---    FROM events_teams_list
---   WHERE event_key = 'world.2014';
-
-CREATE VIEW events_teams_list AS
-       SELECT e."key" AS event_key,
-              e.title AS event_name,
-              t.*
-         FROM teams t
-              INNER JOIN events_teams et ON et.team_id = t.id
-              INNER JOIN events e ON e.id = et.event_id;
-
----
--- use like e.g list World Cup Brazil 2014 rounds:
---
---  SELECT *
---    FROM events_rounds_list
---   WHERE event_key = 'world.2014';
-
-CREATE VIEW events_rounds_list AS
-       SELECT e."key" AS event_key,
-              e.title AS event_name,
-              r.*
-         FROM rounds r
-              INNER JOIN events e ON e.id = r.event_id;
-
